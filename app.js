@@ -11,7 +11,7 @@ app.set("view engine" , "ejs");
 
 app.get("/" ,async (request , response) =>{
   const allTodos = await Todo.getTodos();
-  if(request.accepted("html")){
+  if(request.accepts("html")){ ///////////
   response.render('index' ,{
     allTodos
   });
