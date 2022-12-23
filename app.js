@@ -31,16 +31,16 @@ app.get("/", function (request, response) {
 
 
 app.get("/todos", async function (request, response) {
-  // console.log("Processing list of all Todos ...");
+  console.log("Processing list of all Todos ...");
   // // FILL IN YOUR CODE HERE
-  // try {
-  //   const todos = await Todo.findAll();
-  //   return response.send(todos);
-  // } catch (error) {
-  //   console.log(error);
-  //   return response.status(422).json(error);
-  // }
-  console.log("Todo list", request.body);
+  try {
+    const todos = await Todo.findAll();
+    return response.send(todos);
+  } catch (error) {
+    console.log(error);
+    return response.status(422).json(error);
+  }
+  // console.log("Todo list", request.body);
   // First, we have to query our PostgerSQL database using Sequelize to get list of all Todos.
   // Then, we have to respond with all Todos, like:
   // response.send(todos)
