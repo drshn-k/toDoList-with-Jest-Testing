@@ -52,48 +52,48 @@ describe("Todo Application", function () {
     const parsedUpdateResponse = JSON.parse(markCompleteResponse.text);
     expect(parsedUpdateResponse.completed).toBe(true);
   });
+// //
+//   test("Fetches all todos in the database using /todos endpoint", async () => {
+//     await agent.post("/todos").send({
+//       title: "Buy doodh",
+//       dueDate: new Date().toISOString(),
+//       completed: false,
+//     });
+//     await agent.post("/todos").send({
+//       title: "Buy paaani",
+//       dueDate: new Date().toISOString(),
+//       completed: false,
+//     });
+//     const response = await agent.get("/todos");
+//     const parsedResponse = JSON.parse(response.text);
+
+//     expect(parsedResponse.length).toBe(4);
+//     expect(parsedResponse[3]["title"]).toBe("Buy paaani");
+//   });
 //
-  test("Fetches all todos in the database using /todos endpoint", async () => {
-    await agent.post("/todos").send({
-      title: "Buy xbox",
-      dueDate: new Date().toISOString(),
-      completed: false,
-    });
-    await agent.post("/todos").send({
-      title: "Buy ps3",
-      dueDate: new Date().toISOString(),
-      completed: false,
-    });
-    const response = await agent.get("/todos");
-    const parsedResponse = JSON.parse(response.text);
+  // test("Deletes a todo with the given ID if it exists and sends a boolean response", async () => {
+  //   // FILL IN YOUR CODE HERE
+  //   const response = await agent.post("/todos").send({
+  //     title: "Accounting",
+  //     dueDate: new Date().toISOString(),
+  //     completed: false,
+  //   });
+  //   const parsedResponse = JSON.parse(response.text);
+  //   const todoID = parsedResponse.id;
 
-    expect(parsedResponse.length).toBe(4);
-    expect(parsedResponse[3]["title"]).toBe("Buy ps3");
-  });
-//
-  test("Deletes a todo with the given ID if it exists and sends a boolean response", async () => {
-    // FILL IN YOUR CODE HERE
-    const response = await agent.post("/todos").send({
-      title: "Accounting",
-      dueDate: new Date().toISOString(),
-      completed: false,
-    });
-    const parsedResponse = JSON.parse(response.text);
-    const todoID = parsedResponse.id;
+  //   const response1 = await agent.get("/todos");
+  //   const parsedResponse1 = JSON.parse(response1.text);
+  //   const InitialLength = parsedResponse1.length;
 
-    const response1 = await agent.get("/todos");
-    const parsedResponse1 = JSON.parse(response1.text);
-    const InitialLength = parsedResponse1.length;
+  //   expect(parsedResponse1.length).toBe(5);
 
-    expect(parsedResponse1.length).toBe(5);
+  //   const Deletedtodo = await agent.delete(`/todos/${todoID}`).send();
+  //   const parsedResponse3 = JSON.parse(Deletedtodo.text);
+  //   expect(parsedResponse3).toBe(true);
 
-    const Deletedtodo = await agent.delete(`/todos/${todoID}`).send();
-    const parsedResponse3 = JSON.parse(Deletedtodo.text);
-    expect(parsedResponse3).toBe(true);
+  //   const response2 = await agent.get("/todos");
+  //   const parsedResponse2 = JSON.parse(response2.text);
 
-    const response2 = await agent.get("/todos");
-    const parsedResponse2 = JSON.parse(response2.text);
-
-    expect(parsedResponse2.length).toBe(InitialLength - 1);
-  });
+  //   expect(parsedResponse2.length).toBe(InitialLength - 1);
+  // });
 });
