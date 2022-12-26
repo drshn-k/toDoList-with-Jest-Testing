@@ -32,15 +32,15 @@
                     this is sample to compair
 
                 </h3> -->
-                <form>
+                <form action="/todos" method="post">
                     <div class="flex gap-2 py-4">
                         <div class="flex-auto">
-                            <input type="text" placeholder="What's next?"
+                            <input type="text" name="title" placeholder="What's next?"
                                 class="border border—gray-300 rounded text—gray—900 w-full p-2 text-sm" required />
                         </div>
                         <div class="flex-auto">
                             <input class="border border—gray-300 rounded text—gray—900 w-full p-2 text-sm leading-4"
-                                type="date" />
+                                type="date" name="dueDate" />
                         </div>
                         <div class="flex-none">
                             <button type="submit"

@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const path = require("path");
+app.use(express.urlencoded({ extended: false }));
 //7 - 20
 
 app.set("view engine", "ejs");
@@ -25,8 +26,17 @@ app.get("/", async (request, response) => {
   // response.render('index');
 });
 // eslint-disable-next-line no-unused-vars
-app.get("/", function (request, response) {
-  response.send("Hello World");
+app.get("/", async (request, response) => {
+  const overdue = await Todo.overdue();
+  const dueToday = await Todo.dueToday();
+  const dueLater = await Todo.dueLater();
+
+  response.render("index", {
+    title: "Todo application",
+    overdue,
+    dueToday,
+    dueLater,
+  });
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -56,24 +66,25 @@ app.get("/todos/:id", async function (request, response) {
   }
 });
 //
-app.post("/todos", async function (request, response) {
-  // console.log("Creating a todo", request.body);
-  // try {
-  //   const todo = await Todo.addTodo({
-  //     title: request.body.title,
-  //     dueDate: request.body.dueDate,
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  //   return response.status(422).json(error);
-  // }
+app.post("/todos", async (request, response) => {
+  console.log("Creating a todo", request.body);
   try {
-    const todo = await Todo.addTodo(request.body);
-    return response.json(todo);
+    await Todo.addTodo({
+      title: request.body.title,
+      dueDate: request.body.dueDate,
+    });
+    return response.redirect("/");
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);
   }
+  // try {
+  //   const todo = await Todo.addTodo(request.body);
+  //   return response.json(todo);
+  // } catch (error) {
+  //   console.log(error);
+  //   return response.status(422).json(error);
+  // }
 });
 //
 app.put("/todos/:id/markAsCompleted", async function (request, response) {
