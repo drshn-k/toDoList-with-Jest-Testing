@@ -5,26 +5,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind css -->
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>To-Do Manager</title>
+    
+
 </head>
-
 <body>
-    <%- include('header.ejs') %>
-        <table>
-            <% for(var i=0 ; i < allTodos.length ;i++){%>
-                <tr>
-                    <td>
-                        <%=allTodos[i].title %>
-                    </td>
-                </tr> 
-                <% } %>
 
-        </table>
+    <%- include('header.ejs') %>
+    <div class="grid grid-cols-6 gap-4">
+        <div class="col-start-3 col-span-2">
+
+                <!-- <h1>
+                    this is sample to compair
+
+                </h1>
+                <h2>
+                    this is sample to compair
+
+                </h2>
+                <h3>
+                    this is sample to compair
+
+                </h3> -->
+                <form>
+                    <div class="flex gap-2 py-4">
+                        <div class="flex-auto">
+                            <input type="text" placeholder="What's next?"
+                                class="border border—gray-300 rounded text—gray—900 w-full p-2 text-sm" required />
+                        </div>
+                        <div class="flex-auto">
+                            <input class="border border—gray-300 rounded text—gray—900 w-full p-2 text-sm leading-4"
+                                type="date" />
+                        </div>
+                        <div class="flex-none">
+                            <button type="submit"
+                                class="bg-green-500 text-white px-5 py-1.5 mr-2 mb-2 rounded">Add</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Form ended here -->
+
+
+                <!-- Todos starting -->
+
+                <%- include('todos.ejs') %>
+
+
+        </div>
+    </div>
+
+    <!-- This is the table queries that we dont want in level 8 -->
+
+
+    <!-- <table> -->
+    <%#for(var i=0 ; i < allTodos.length ;i++){%>
+        <!-- <tr> -->
+        <!-- <td> -->
+        <!-- <%#=allTodos[i].title %> -->
+        <!-- </td> -->
+        <!-- </tr> -->
+        <!-- <%#} %> -->
+
+        <!-- </table> -->
 
 </body>
 
-<footer>
+<!-- Body ending here  -->
+
+
+<!-- Footer started here saying Built with Node.js -->
+
+<footer class="flex py-4 justify-center">
     <%- include("caption.ejs"); %>
 </footer>
 

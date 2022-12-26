@@ -1,4 +1,11 @@
+
+
 body{
-    color: red;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: black;
+    font-family:sans-serif;
+  
+}
+
+.Todo-Item:hover .trash-icon {
+    display: block;
 }
