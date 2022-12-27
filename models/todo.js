@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Op } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
     /**
@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     // eslint-disable-next-line no-unused-vars
     static associate(models) {
+      // Todo.belongsTo(models.User, {
+      //   foreignKey: "userId",
+      // });
       // define association here
     }
 
@@ -19,6 +22,65 @@ module.exports = (sequelize, DataTypes) => {
       return this.create({ title: title, dueDate: dueDate, completed: false });
     }
 
+    setCompletionStatus(fort) {
+      return this.update({ completed: fort });
+    }
+
+    static async dueLater() {
+      return this.findAll({
+        where: {
+          dueDate: {
+            [Op.gt]: new Date(),
+          },
+        },
+      });
+    }
+    static async dueToday() {
+      return Todo.findAll({
+        where: {
+          dueDate: {
+            [Op.eq]: new Date(),
+          },
+        },
+      });
+    }
+
+    static async overdue() {
+      return Todo.findAll({
+        where: {
+          completed: false,
+          dueDate: {
+            [Op.lt]: new Date(),
+          },
+        },
+      });
+    }
+
+    static async remove(id) {
+      return this.destroy({
+        where: {
+          id,
+        },
+      });
+    }
+
+    static async completed(id) {
+      return await Todo.findAll({
+        where: {
+          completed: true,
+
+          id,
+        },
+      });
+    }
+    static async completedTodos() {
+      return await Todo.findAll({
+        where: {
+          completed: true,
+        },
+        order: [["id", "ASC"]],
+      });
+    }
     markAsCompleted() {
       return this.update({ completed: true });
     }
