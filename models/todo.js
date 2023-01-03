@@ -32,21 +32,23 @@ module.exports = (sequelize, DataTypes) => {
           dueDate: {
             [Op.gt]: new Date(),
           },
+          completed: false,
         },
       });
     }
     static async dueToday() {
-      return Todo.findAll({
+      return await Todo.findAll({
         where: {
           dueDate: {
             [Op.eq]: new Date(),
           },
+          completed: false,
         },
       });
     }
 
     static async overdue() {
-      return Todo.findAll({
+      return await Todo.findAll({
         where: {
           completed: false,
           dueDate: {

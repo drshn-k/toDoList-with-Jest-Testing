@@ -12,49 +12,50 @@
     <link rel="stylesheet" href="./css/style.css">
 
     <title>To-Do Manager</title>
-    
+
     <script>
-        var token = document 
-        .querySelector('meta[name="csrf-token"]')
-        .getAttribute("content");
-        function updateTodo(id , fort){
-            fetch(`/todos/${id}`,{
-                method:"put",
-                headers: {"Content-Type": "application/json"},
+        var token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+        function updateTodo(id, fort) {
+            fetch(`/todos/${id}`, {
+                method: "put",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     "_csrf": token,
                     "completed": fort
                 })
             })
 
-            .then((res) =>{
-                // if(res.ok){
+                .then((res) => {
+                    // if(res.ok){
 
                     window.location.reload();
-                // }
-            })
-            .catch((err) => console.error(err));
+                    // }
+                })
+                .catch((err) => console.error(err));
         }
 
-        function deleteTodo(id){
-            fetch(`/todos/${id}` ,{
+        function deleteTodo(id) {
+            fetch(`/todos/${id}`, {
                 method: "delete",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     "_csrf": token
                 })
             })
-            .then((res) => {
-                if(res.ok){
-                    window.location.reload();
-                }
-            })
-            .catch((err) => console.error(err));
+                .then((res) => {
+                    if (res.ok) {
+                        window.location.reload();
+                    }
+                })
+                .catch((err) => console.error(err));
         }
 
     </script>
 
 </head>
+
 <body>
 
     <div class="grid grid-cols-6 gap-4">
@@ -81,8 +82,8 @@
                                 class="border border—gray-300 rounded text—gray—900 w-full p-2 text-sm" required />
                         </div>
                         <div class="flex-auto">
-                            <input class="border border—gray-300 rounded text—gray—900 w-full p-2 text-sm leading-4 " 
-                                type="date" name="dueDate" required/>
+                            <input class="border border—gray-300 rounded text—gray—900 w-full p-2 text-sm leading-4 "
+                                type="date" name="dueDate" required />
                         </div>
                         <div class="flex-none">
                             <button type="submit"
@@ -95,13 +96,13 @@
 
 
                 <!-- Todos starting -->
-                    <div>
-                        <%- include('todo.ejs', {title: "Due Today" , data: dueToday}) %>
+                <div>
+                    <%- include('todo.ejs', {title: "Due Today" , data: dueToday}) %>
                         <%- include('todo.ejs' , {title: "Overdue" , data: overdue}) %>
-                        <%- include('todo.ejs' , {title: "Due Later" , data: dueLater}) %>
-                        <%- include('todo.ejs' , {title: "Completed" , data: completedtodos}) %>
+                            <%- include('todo.ejs' , {title: "Due Later" , data: dueLater}) %>
+                                <%- include('todo.ejs' , {title: "Completed" , data: completedtodos}) %>
 
-                    </div>
+                </div>
 
 
         </div>
